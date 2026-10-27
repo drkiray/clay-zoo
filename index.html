@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff5fa2">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Глиняный зоопарк</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- Заставка при первом запуске -->
+  <section id="splash" class="splash" hidden>
+    <div class="splash-animals" aria-hidden="true">
+      <span>🐻</span><span>🐲</span><span>🦄</span><span>🐙</span><span>🦉</span>
+    </div>
+    <h1 class="splash-title">Зоопарк <span id="splashName"></span></h1>
+    <p class="splash-sub">Сфотографируй свою глиняную фигурку,<br>и она станет карточкой героя!</p>
+    <button id="btnStart" class="btn btn-primary btn-big">Поехали! ✨</button>
+  </section>
+
+  <!-- Коллекция -->
+  <section id="home" class="view" hidden>
+    <header class="top">
+      <h1 id="title" class="title"></h1>
+      <p id="count" class="count"></p>
+    </header>
+    <div id="notice" class="notice" hidden></div>
+    <div id="grid" class="grid"></div>
+    <div class="fab-bar">
+      <button id="btnNew" class="btn btn-primary btn-big">📷 Снять фигурку</button>
+    </div>
+  </section>
+
+  <!-- Создание карточки -->
+  <section id="create" class="view" hidden>
+    <header class="top top-row">
+      <button id="createBack" class="btn-round" aria-label="Назад">←</button>
+      <h2 class="title title-sm">Новая карточка</h2>
+    </header>
+
+    <div id="pickStep" class="pick">
+      <div class="pick-emoji" aria-hidden="true">🧸</div>
+      <p class="pick-text">Положи фигурку на светлый стол<br>и сфотографируй её</p>
+      <button id="btnCamera" class="btn btn-primary btn-big">📷 Сфотографировать</button>
+      <button id="btnGallery" class="btn btn-ghost btn-big">🖼️ Выбрать из галереи</button>
+    </div>
+
+    <div id="editStep" class="edit" hidden>
+      <p class="label">Кто это?</p>
+      <div id="chips" class="chips"></div>
+
+      <div id="previewWrap" class="card-wrap preview">
+        <canvas id="preview" width="720" height="1000"></canvas>
+      </div>
+
+      <div class="reroll">
+        <button id="rrName" class="btn btn-soft">🎲 Другое имя</button>
+        <button id="rrPower" class="btn btn-soft">✨ Другая суперсила</button>
+        <button id="rrAll" class="btn btn-soft btn-wide">🎰 Всё заново</button>
+      </div>
+
+      <label class="field">
+        <span class="label">Имя</span>
+        <input id="inName" type="text" maxlength="26" autocomplete="off">
+      </label>
+      <label class="field">
+        <span class="label">Суперсила</span>
+        <textarea id="inPower" rows="2" maxlength="90"></textarea>
+      </label>
+
+      <button id="btnAdd" class="btn btn-primary btn-big">🐾 В зоопарк!</button>
+      <div class="row2">
+        <button id="btnSaveNew" class="btn btn-soft">💾 Сохранить</button>
+        <button id="btnShareNew" class="btn btn-soft">📤 Поделиться</button>
+      </div>
+      <button id="btnRetake" class="btn btn-link">Выбрать другое фото</button>
+    </div>
+  </section>
+
+  <!-- Просмотр карточки -->
+  <section id="viewer" class="viewer" hidden>
+    <div class="viewer-top">
+      <button id="viewClose" class="btn-round" aria-label="Закрыть">✕</button>
+    </div>
+    <div id="viewWrap" class="card-wrap viewer-card">
+      <canvas id="viewCanvas" width="720" height="1000"></canvas>
+    </div>
+    <div class="viewer-actions">
+      <button id="btnSaveView" class="btn btn-soft">💾 Сохранить</button>
+      <button id="btnShareView" class="btn btn-primary">📤 Поделиться</button>
+      <button id="btnDelete" class="btn btn-danger" aria-label="Удалить">🗑️</button>
+    </div>
+  </section>
+</main>
+
+<!-- Подтверждение удаления -->
+<div id="confirm" class="modal" hidden role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <p id="confirmText" class="modal-text"></p>
+    <div class="row2">
+      <button id="confirmNo" class="btn btn-soft">Оставить</button>
+      <button id="confirmYes" class="btn btn-danger-solid">Удалить</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<input type="file" id="camInput" accept="image/*" capture="environment" hidden>
+<input type="file" id="galInput" accept="image/*" hidden>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
