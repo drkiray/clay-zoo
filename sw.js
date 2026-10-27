@@ -1,5 +1,5 @@
 // Простой service worker: оболочка приложения лежит в кэше, обновляется в фоне.
-const CACHE = 'clay-zoo-v1';
+const CACHE = 'clay-zoo-v2';
 const ASSETS = [
   './', 'index.html', 'styles.css', 'data.js', 'app.js', 'manifest.webmanifest',
   'fonts/fonts.css',
